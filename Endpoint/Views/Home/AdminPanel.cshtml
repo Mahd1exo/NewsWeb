@@ -1,0 +1,225 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+    int x = 0;
+}
+@model AdminPanelViewModel
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body dir="rtl">
+
+
+
+
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="nav nav-tabs flex-column flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home">داشبورد</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu1" >مدیریت اخبار</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu2">مدیریت نظرات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane container active" id="home">
+                        </div>
+                        <div class="tab-pane container fade" id="menu1">
+                            <div class="container">
+                                <div class="row">
+                                    <h2>لیست اخبار </h2>
+                                    <table class="table-fluid table-bordered table-hover table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>شناسه خبر</th>
+                                                <th> عنوان</th>
+                                                <th>شرح خبر</th>
+                                                <th>محتوا</th>
+                                                <th>بازدید</th>
+                                                <th>تاریخ نشر</th>
+                                                <th>آدرس عکس</th>
+                                                <th>نشر</th>
+                                                <th>خبر داغ</th>
+                                                <th>موضوع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.NewsList)
+                                            {
+                                                <tr>
+                                                    <td>@(x++)</td>
+                                                    <td>@item.NewsId</td>
+                                                    <td>@item.Title</td>
+                                                    <td>@item.Title</td>
+                                                    <td>@item.ViewCount</td>
+                                                    <td>@item.PublishDate</td>
+
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6"><a href="~/Home/EditNews/@item.NewsId" class="btn btn-sm btn-warning">ویرایش</a></div>
+																<div class="col-md-6"><a href="~/Home/DeleteNews/@item.NewsId" class="btn btn-sm btn-danger">حذف</a></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="row mt-3">
+
+                                    <h2>افزودن خبر</h2>
+                                    <form asp-action="AddNews" method="post">
+                                        <div class="form-group">
+                                            <label for="Title" style="font-size:20px">عنوان :</label>
+                                            <input type="text" class="form-control" id="Title" name="Title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Description" style="font-size:20px">شرح خبر :</label>
+                                            <textarea type="text" class="form-control" id="Description" name="Description" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Content" style="font-size:20px">محتوای خبر :</label>
+                                            <textarea type="text" class="form-control" id="Content" name="Content" rows="8"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ImageUrl " style="font-size:20px"> آدرس عکس :</label>
+                                            <input type="text" class="form-control" id="ImageUrl" name="ImageUrl">
+                                        </div>
+                                        <div class="container form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="CategoryId " style="font-size:20px">موضوع :</label>
+                                                    <select class="form-select form-select-md" id="CategoryId" name="CategoryId">
+                                                        @foreach (var item in Model.Categories)
+                                                        {
+                                                            <option value="@item.CategoryId">@item.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-check-label" style="font-size:18px">
+                                                        خبر داغ؟
+                                                    </label>
+                                                    <select class="form-select form-select-md" id="IsHottestNews" name="IsHottestNews">
+                                                        <option value="true">بله</option>
+                                                        <option value="false" selected>خیر</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                    <label class="form-check-label" style="font-size:18px">
+                                                        نشر شود؟
+                                                    </label>
+                                                    <select class="form-select form-select-md" id="IsPublished" name="IsPublished">
+                                                        <option value="true" selected>بله</option>
+                                                        <option value="false ">خیر</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <br>
+                                                    <button type="submit" class="btn btn-success btn-lg"> ثبت خبر </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane container fade" id="menu2">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <h4>شناسه کامنت</h4>
+                                            </th>
+                                            <th>
+                                            <h4>ایمیل کامنت</h4>
+                                            </th>
+                                            <th>
+                                            <h4>محتوای کامنت</h4>
+                                            </th>
+          
+                                            <th>
+                                            <h4>شناسه خبر</h4>
+                                            </th>
+
+                                        <th>
+                                            <h4>عملیات</h4>
+                                        </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                @foreach (var item in Model.Comments) {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CommentId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Text)
+                                            </td>
+         
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NewsId)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("تایید", "Active", new {  id=item.CommentId  })
+                                               @Html.ActionLink("حذف", "Delete", new {  id=item.CommentId  })
+                                            </td>
+                                        </tr>
+                                }
+                                    </tbody>
+                                </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav tabs -->
+        <!-- Tab panes -->
+
+    </body>
+</html>
+
+</body>
+</html>

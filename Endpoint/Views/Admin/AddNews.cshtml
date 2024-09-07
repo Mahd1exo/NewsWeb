@@ -1,0 +1,77 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int x = 0;
+}
+@model AdminPanelViewModel
+
+    <div class="row mt-3">
+
+        <h2>افزودن خبر</h2>
+        <form asp-action="AddNews" method="post">
+            <div class="form-group">
+                <label for="Title" style="font-size:20px">عنوان :</label>
+                <input type="text" class="form-control" id="Title" name="Title">
+            </div>
+            <div class="form-group">
+                <label for="Description" style="font-size:20px">شرح خبر :</label>
+                <textarea type="text" class="form-control" id="Description" name="Description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Content" style="font-size:20px">محتوای خبر :</label>
+                <textarea type="text" class="form-control" id="Content" name="Content" rows="8"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ImageUrl " style="font-size:20px"> آدرس عکس :</label>
+                <input type="text" class="form-control" id="ImageUrl" name="ImageUrl">
+            </div>
+            <div class="form-group">
+                <label for="Tags " style="font-size:20px"> تگ ها :</label>
+                <input type="text" class="form-control" id="Tags"   name="Tags">
+            </div>
+            <div class="container form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="CategoryId " style="font-size:20px">موضوع :</label>
+                        <select class="form-select form-select-md" id="CategoryId" name="CategoryId">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <option value="@item.CategoryId">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-check-label" style="font-size:18px">
+                            خبر داغ؟
+                        </label>
+                        <select class="form-select form-select-md" id="IsHottestNews" name="IsHottestNews">
+                            <option value="true">بله</option>
+                            <option value="false" selected>خیر</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+
+                        <label class="form-check-label" style="font-size:18px">
+                            نشر شود؟
+                        </label>
+                        <select class="form-select form-select-md" id="IsPublished" name="IsPublished">
+                            <option value="true" selected>بله</option>
+                            <option value="false ">خیر</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <button type="submit" class="btn btn-success btn-lg"> ثبت خبر </button>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+        </form>
+
+    </div>
+
+
+

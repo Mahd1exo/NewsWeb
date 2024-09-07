@@ -1,0 +1,54 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int x = 1;
+}
+@model AdminPanelViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <button type="button" class="btn btn-success btn-lg"><a href="~/admin/Addnews" class="btn" style="color:white">افزودن خبر</a></button>
+    </div>
+</div>
+<div class="row">
+    <h2>لیست اخبار </h2>
+    <table class="table-fluid table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>شناسه خبر</th>
+                <th> عنوان</th>
+                <th>بازدید</th>
+                <th>تاریخ نشر</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.NewsList)
+            {
+                <tr>
+                    <td>@(x++)</td>
+                    <td>@item.NewsId</td>
+                    <td>
+                        <a href="~/home/singlenews/@item.NewsId"style="text-decoration:none">@item.Title</a>
+                    </td>
+                    <td>@item.ViewCount</td>
+                    <td>@item.PublishDate</td>
+
+                    <td>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6"><a href="~/admin/EditNews/@item.NewsId.ToString()" class="btn btn-sm btn-warning">ویرایش</a></div>
+                                <div class="col-md-6"><a href="~/admin/DeleteNews/@item.NewsId" class="btn btn-sm btn-danger">حذف</a></div>
+                            </div>
+                        </div>
+
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

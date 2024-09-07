@@ -1,0 +1,59 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int x = 1;
+}
+@model List<Category>
+<div class="container">
+    <div class="row">
+        <form asp-action="AddCategory" method="post">
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="Title" style="font-size:20px">نام موضوع :</label>
+                    <input type="text" class="form-control" id="Name" name="Name">
+                </div>
+                <div class="col-5">
+                    <br>
+                    <button type="submit" class="btn btn-success "> ثبت موضوع</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="row">
+        <h2>لیست موضوعات </h2>
+        <table class="table-fluid table-bordered table-hover table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>شناسه موضوع</th>
+                    <th> عنوان</th>
+                    <th>تعداد اخبار</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(x++)</td>
+                        <td>@item.CategoryId</td>
+                        <td>@item.Name</td>
+                        <td>@item.News.Count</td>
+                        <td>
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-md-6"><a href="~/admin/DeleteCategory/@item.CategoryId" class="btn btn-sm btn-danger">حذف</a></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<hr />
+

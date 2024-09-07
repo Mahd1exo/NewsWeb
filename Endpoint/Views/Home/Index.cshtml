@@ -1,0 +1,95 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+@model HomeViewModel
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.cdnfonts.com/css/iranian-sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</head>
+<body dir="rtl">
+    <header>
+    </header>
+    <main>
+        <diV class="container">
+            <div class="row">
+                <section class="col-md-9">
+                    <div class="row">
+                        <section class="col-md-8">
+                            <div class="row">
+                                <article>
+                                    <a class="row" style="text-decoration: none;" href="~/home/SingleNews/@Model.HottestNews.NewsId">
+                                        <figure class="col-md-5">
+                                            <img class="img-fluid" src="@Model.HottestNews.ImageUrl" alt="@Model.HottestNews.Title">
+                                        </figure>
+                                        <div class="col-md-7">
+                                            <h1 style="font-size:20px;color:black;font-family: 'Iranian Sans', sans-serif;">
+                                               @Model.HottestNews.Title
+                                            </h1>
+                                            <p style="font-size: 16px;color:black;font-family: 'Iranian Sans', sans-serif;">
+                                                @Model.HottestNews.Description
+                                            </p>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <hr >
+                            <diV class="row">
+                                <section class="container">
+                                    <ul style="list-style-type: none;">
+                                        @foreach( var item in Model.LatestNews){
+                                            <li class="list-item">
+                                                <article>
+                                                    <a class="row" style="text-decoration: none;" href="~/home/singleNews/@item.NewsId">
+                                                        <figure class="col-md-4">
+                                                            <img class="img-fluid" src="@item.ImageUrl" alt="">
+                                                        </figure>
+                                                        <div class="col-md-8">
+                                                            <h2 style="font-size: 18px;color:black;font-family: 'Iranian Sans', sans-serif;">
+                                                                @item.Title
+                                                            </h2>
+                                                            <p style="font-size: 14px;color:black;font-family: 'Iranian Sans', sans-serif;">
+                                                               @item.Description
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </article>
+                                            </li>
+                                            <hr>
+                                        }
+                                    </ul>
+                                </section>
+
+
+                            </diV>
+                        </section>
+                        <section class="col-md-4 ">
+                            <div class="row">
+                                <h6 style="color: red;">
+                                    <span class="spinner-grow spinner-grow-sm text-danger"> </span> پربیننده ترین اخبار
+                                </h6>
+                                <br>
+                             @Html.Partial("_TrendNews",Model.Trends)
+
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section class="col-md-3">
+                   @Html.Partial("_Ads",Model.Ads)
+                </section>
+            </div>
+        </diV>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

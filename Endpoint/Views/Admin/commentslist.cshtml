@@ -1,0 +1,129 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int x = 1;
+}
+@model IEnumerable<NewsWeb.Entittes.Comment>
+<h2>نظرت جدید :</h2>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+          
+            <th>
+                <h6>ردیف</h6>
+            </th>
+            <th>
+                <h6>شناسه کامنت</h6>
+            </th>
+            <th>
+                <h6>ایمیل کامنت</h6>
+            </th>
+            <th>
+                <h6>محتوای کامنت</h6>
+            </th>
+
+            <th>
+                <h6>شناسه خبر</h6>
+            </th>
+
+            <th>
+                <h6>عملیات</h6>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (!item.IsActive)
+            {
+                <tr>
+                <td>
+                    <p>@(x++)</p>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsId)
+                </td>
+                <td>
+                    @Html.ActionLink("تایید", "Active", new {  id=item.CommentId  })
+                    @Html.ActionLink("حذف", "Delete", new {  id=item.CommentId  })
+                </td>
+            </tr>
+            }
+            
+        }
+    </tbody>
+</table>
+<br>
+<hr>
+<h2>نظرات تایید شده :</h2>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                <h6>ردیف</h6>
+            </th>
+            <th>
+                <h6>شناسه کامنت</h6>
+            </th>
+            <th>
+                <h6>ایمیل کامنت</h6>
+            </th>
+            <th>
+                <h6>محتوای کامنت</h6>
+            </th>
+
+            <th>
+                <h6>شناسه خبر</h6>
+            </th>
+
+            <th>
+                <h6>عملیات</h6>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.IsActive)
+            {
+                <tr>
+                    <td>
+                        <p>@(x++)</p>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+
+                    <td>
+                        <a href="/home/singlenews/@item.NewsId">@item.NewsId</a>
+                    </td>
+                    <td>
+                        @Html.ActionLink("حذف", "Delete", new {  id=item.CommentId  })
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

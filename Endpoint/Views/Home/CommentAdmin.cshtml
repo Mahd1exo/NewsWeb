@@ -1,0 +1,94 @@
+﻿@model IEnumerable<NewsWeb.Entittes.Comment>
+@{
+
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                شناسه
+            </th>
+            <th>
+                آدرس ایمیل
+            </th>
+            <th>
+                محتوا
+            </th>
+          
+            <th>
+                شناسه خبر
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.NewsId)
+            </td>
+            <td>
+                @Html.ActionLink("تایید", "Active", new {  id=item.CommentId  })
+               @Html.ActionLink("حذف", "Delete", new {  id=item.CommentId  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                شناسه
+            </th>
+            <th>
+                آدرس ایمیل
+            </th>
+            <th>
+                محتوا
+            </th>
+
+            <th>
+                شناسه خبر
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsId)
+                </td>
+                <td>
+                    @Html.ActionLink("حذف", "Delete", new {  id=item.CommentId  })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
