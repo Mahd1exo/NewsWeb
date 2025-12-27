@@ -70,6 +70,7 @@ namespace Endpoint.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddAds(Ads ads)
         {
 
@@ -101,6 +102,7 @@ namespace Endpoint.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddNews(News news, string Tags)
         {
             newsRepository.AddNews(news ,Tags);
@@ -108,12 +110,14 @@ namespace Endpoint.Controllers
             return RedirectToAction("News");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddTag(Tag tag)
         {
             tagRepository.AddTag(tag);
             return RedirectToAction("Tags");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddCategory(Category category)
         {
             categoryRepository.AddCategory(category);
@@ -165,6 +169,7 @@ namespace Endpoint.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditNews(News news)
         {
             newsRepository.update(news);

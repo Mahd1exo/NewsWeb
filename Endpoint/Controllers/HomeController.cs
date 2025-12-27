@@ -65,6 +65,7 @@ namespace Endpoint.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Searching(string search)
         {
             SearchViewModel model = new SearchViewModel()
@@ -76,12 +77,14 @@ namespace Endpoint.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddComment(Comment comment,int id)
         {
             newsRepository.AddComment(comment, id);
             return RedirectToAction("SingleNews",new { id=id});
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddNews(News news, string Tags)
         {
             newsRepository.AddNews(news , Tags);
@@ -113,6 +116,7 @@ namespace Endpoint.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditNews(News news)
         {
             newsRepository.update(news);

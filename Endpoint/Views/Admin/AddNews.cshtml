@@ -9,6 +9,7 @@
 
         <h2>افزودن خبر</h2>
         <form asp-action="AddNews" method="post">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="Title" style="font-size:20px">عنوان :</label>
                 <input type="text" class="form-control" id="Title" name="Title">
@@ -72,6 +73,5 @@
         </form>
 
     </div>
-
 
 

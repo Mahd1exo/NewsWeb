@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,13 @@ namespace Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MainContext>(opt => opt.UseSqlServer("Server=DESKTOP-JV3IHPL;Database=MyNews5;Trusted_Connection=True;"));
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException("Connection string 'DefaultConnection' is not configured.");
+            }
+
+            services.AddDbContext<MainContext>(opt => opt.UseSqlServer(connectionString));
             services.AddControllersWithViews();
         }
 
@@ -35,6 +42,7 @@ namespace Endpoint
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
