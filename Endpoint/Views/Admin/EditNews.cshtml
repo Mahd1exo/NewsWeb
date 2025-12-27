@@ -23,6 +23,7 @@
         <h3>ویرایش خبر @Model.news.NewsId</h3>
 
         <form asp-action="EditNews" method="post">
+            @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label for="Title">عنوان :</label>
                         <input type="text" class="form-control" id="Title" name="Title" value="@Model.news.Title">

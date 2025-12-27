@@ -53,6 +53,7 @@
                             <hr />
                             <div class="row">
                                 <form asp-action="addComment" method="post">
+                                    @Html.AntiForgeryToken()
                                     <div class="form-group">
                                         <label >آدرس ایمیل شما:</label>
                                         <input type="email" name="email" class="form-control" placeholder="name@exaple.com" >
@@ -89,6 +90,5 @@
     </footer>
 </body>
 </html>
-
 
 
